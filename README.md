@@ -4,7 +4,7 @@ Please note that abusive Self-Bots are not allowed by Discord and **your account
 
 ## Examples
 
-![Quickly Add Steam Link](https://i.imgur.com/H1yyrEE.gifv)
+![Quickly Add Steam Link](/examples/steam.gif)
 
 ## How to install
 * Download the git package with github desktop or a git client https://github.com/CreativeBuilds/discord-self
