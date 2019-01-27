@@ -1,5 +1,6 @@
 ﻿# Discord Self Bot
 A discord self bot for updating messages quickly with customizable variables using Node.JS/Discord.JS
+Have notifications for channels and DMs that are important to you while still being in DND mode
 Please note that abusive Self-Bots are not allowed by Discord and **your account may be banned**
 
 ## Examples
