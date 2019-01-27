@@ -1,7 +1,24 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = require('./helpers/Client');
 const fs = require('fs');
 const { join } = require('path');
+const Msgs = require('./helpers/msgs');
+const DNDByPass = require('./helpers/DNDByPass');
+let NotifiableChannels;
+try {
+  NotifiableChannels = require('./helpers/NotifiableChannels.json');
+} catch (err) {
+  NotifiableChannels = {};
+  fs.writeFile(
+    join(__dirname, 'helpers', 'NotifiableChannels.json'),
+    JSON.stringify(NotifiableChannels),
+    err => {
+      if (err) return console.error(err);
+      DNDByPass.update();
+    }
+  );
+}
+
+const notifier = require('./helpers/Notify');
 
 let pastMsgs = {};
 let replacements = {};
@@ -14,6 +31,7 @@ fs.readdir(join(__dirname, 'replacements'), function(err, files) {
   }
 
   files.forEach(function(file, index) {
+    if (file.includes('.json')) return;
     let imported = require(`./replacements/${file}`);
     replacements[imported.name] = imported;
   });
@@ -24,6 +42,7 @@ client.on('ready', () => {
 });
 
 handleMessage = (msg, dontAddToPastMsgs) => {
+  Msgs.addMsg(msg);
   if (msg.author.id === client.user.id) {
     if (!pastMsgs[msg.channel.id]) pastMsgs[msg.channel.id] = [];
     if (!dontAddToPastMsgs) {
@@ -38,6 +57,40 @@ handleMessage = (msg, dontAddToPastMsgs) => {
       }
       if (msg.content.includes('!vanish')) {
         vanish();
+      }
+      if (msg.content.includes('!addChannel')) {
+        let id = msg.channel.id;
+        if (!NotifiableChannels[id]) {
+          NotifiableChannels[id] = true;
+          fs.writeFile(
+            join(__dirname, 'helpers', 'NotifiableChannels.json'),
+            JSON.stringify(NotifiableChannels),
+            err => {
+              if (err) return console.error(err);
+              DNDByPass.update();
+            }
+          );
+        }
+
+        msg.delete();
+      }
+      if (msg.content.includes('!removeChannel')) {
+        let id = msg.channel.id;
+        if (!NotifiableChannels[id]) return msg.delete();
+        NotifiableChannels[id] = false;
+        fs.writeFile(
+          join(__dirname, 'helpers', 'NotifiableChannels.json'),
+          JSON.stringify(NotifiableChannels),
+          err => {
+            if (err) return console.error(err);
+            DNDByPass.update();
+          }
+        );
+        msg.delete();
+      }
+      if (msg.content.includes('!muteAll')) {
+        DNDByPass.muteToggle();
+        msg.delete();
       }
     }
     if (!!msg.content.match(/\{.*?\}/g)) {
