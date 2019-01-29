@@ -1,5 +1,6 @@
 {
   "token": "DISCORD TOKEN",
+  "prefix": "!",
   "defaultTwitter": "https://twitter.com/creativebuilds",
   "defaultSteam": "https://steamcommunity.com/id/creativebuilds"
 }
