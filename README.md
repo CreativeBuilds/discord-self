@@ -15,6 +15,8 @@ Please note that abusive Self-Bots are not allowed by Discord and **your account
 * Now just do `node index` from the project directory and start using custom variables!
 
 ## Updates
+### V1.2.0
+* Added a modular command system that imports \*.js files for a list of commands
 ### V1.1.0
 * Added the ability to setup Desktop Notifications for certain channels/dm's even if you're in DND mode.
   * To add use `!addChannel`
