@@ -20,10 +20,6 @@ module.exports = {
       myTotalMsgs++;
     }
   },
-  //   getMyMsgsInChannel: function(channelID){
-  //       if(!channelID) return;
-  //       if(myMsgs[channelID]) return;
-  //   },
   msgCount: myTotalMsgs,
   totalMsgsForChannel: function(channelID) {
     if (!channelID) return;

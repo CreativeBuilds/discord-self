@@ -68,7 +68,14 @@ handleMessage = (msg, dontAddToPastMsgs) => {
       command = command.replace(config.prefix, '');
 
       if (commands[command]) {
-        commands[command].run({ msg, NotifiableChannels, DNDByPass, pastMsgs });
+        commands[command].run({
+          msg,
+          NotifiableChannels,
+          DNDByPass,
+          pastMsgs,
+          client,
+          vars
+        });
       }
     }
     if (!!msg.content.match(/\{.*?\}/g)) {
