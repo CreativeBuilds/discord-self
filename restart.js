@@ -19,15 +19,17 @@ monitor.on('crash', () => {
 });
 
 monitor.on('exit', (code, signal) => {
-  simpleGit.pull(stuff => {
-    console.log('PULLING', stuff);
-    monitor.stop();
-  });
+  monitor.stop();
 });
 
 monitor.on('stop', () => {
   console.log('---- Monitor Stopped! ----', monitor.status);
-  monitor.start();
+  simpleGit.pull(() => {
+    console.log('Checking for updates...');
+    setTimeout(() => {
+      monitor.start();
+    }, 3000);
+  });
 });
 
 monitor.start();
