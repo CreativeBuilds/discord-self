@@ -3,5 +3,6 @@
   "prefix": "!",
   "defaultTwitter": "https://twitter.com/creativebuilds",
   "defaultSteam": "https://steamcommunity.com/id/creativebuilds",
-  "defaultGithub": "https://github.com/creativebuilds"
+  "defaultGithub": "https://github.com/creativebuilds",
+  "guildid": "SET GUILD ID THAT YOU OWN HERE FOR EMOTES"
 }
