@@ -1,5 +1,6 @@
 module.exports = {
   name: 'alt',
+  firstOnly: true,
   run: function(opts) {
     let { msg, vars } = opts;
     let str = vars.join(' ');

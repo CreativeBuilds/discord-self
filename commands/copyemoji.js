@@ -20,16 +20,7 @@ module.exports = {
         let fn = vars[0] || arr[arr.length - 1];
         let options = vars.join(' ');
         msg.delete().then(() => {
-          let dir = join(__dirname, '../', 'downloads');
-          fs.ensureDir(dir, err => {
-            if (err) throw err;
-            download(url, join(dir, fn), () => {
-              fs.readFile(join(dir, fn), (err, data) => {
-                if (err) throw err;
-                guild.createEmoji(data, name);
-              });
-            });
-          });
+          guild.createEmoji(url, name);
         });
       }
     });
