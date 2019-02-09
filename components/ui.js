@@ -8,7 +8,6 @@ const simpleGit = require('simple-git')(__dirname);
 const { join } = require('path');
 var clear = require('clear');
 const dateSince = require('date-since').default;
-let _package = require('../package.json');
 clear();
 
 var monitor = respawn(['node', join(__dirname, '../src', 'index.js')], {
@@ -83,8 +82,6 @@ class UI extends Component {
               status: 'Online',
               timeAlive: Date.now()
             });
-            console.log(require('../package.json').version);
-            _package = require('../package.json');
             monitor.start();
           }, 3000);
         });
@@ -145,9 +142,6 @@ class UI extends Component {
         <Color green={this.state.alive} red={!this.state.alive}>
           {this.state.status}
         </Color>
-        <br />
-        <Color hex="#f4f4f0">Current Version: </Color>
-        <Color cyanBright>{_package.version}</Color>
         <br />
         <Color hex="#f4f4f0">
           ----------------------------------------------
